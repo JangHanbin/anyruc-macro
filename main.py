@@ -59,6 +59,8 @@ if __name__ =='__main__':
         ############################### login #####################################
 
         for malware in os.listdir(path):
+            if not malware.endswith('.exe'):
+                continue
             try:
                 driver.find_element_by_id('newTaskBtn').click()
             except:
@@ -70,6 +72,7 @@ if __name__ =='__main__':
 
             try: # to avoid cookie agreement
                 driver.implicitly_wait(10)
+                time.sleep(1)
                 driver.find_element_by_id('publicWarningAgree').click()
                 logger.info('Cookie agreement detected. now avoiding by click agree button.')
             except:
