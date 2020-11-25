@@ -36,17 +36,20 @@ if __name__ =='__main__':
         os.makedirs('{0}/{1}'.format(path, args.dest))
 
     chrome_options = Options()
+
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")  # linux only
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
+
 
     with webdriver.Chrome('./chromedriver', options=chrome_options) as driver:
         driver.implicitly_wait(60)
         ############################### login #####################################
         url = 'https://app.any.run'
         driver.get(url)
-        driver.find_element_by_class_name('item-descr').click()
+        driver.save_screenshot('test.png')
+        driver.find_element_by_id('newTaskBtn').click()
 
         logger.info('Try to login to anyrun ({0})...'.format(url))
         driver.find_element_by_id('at-field-username_and_email').send_keys(id)
