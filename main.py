@@ -92,10 +92,16 @@ if __name__ =='__main__':
                     results.append(driver.find_element_by_class_name('description').text)
                     driver.find_element_by_class_name('close-modal.closeAttackModal').click()
 
-                if results:
-                    with open('{0}/{1}/{2}.txt'.format(path, args.dest, malware), 'w') as f:
-                        for result in results:
-                            f.writelines(result.encode('utf-8')+'\n\n\n')
+                try:
+                    if results:
+                        with open('{0}/{1}/{2}.txt'.format(path, args.dest, malware), 'w') as f:
+                            for result in results:
+                                f.writelines(result.encode('utf-8')+'\n\n\n')
+                except Exception as e:
+                    logger.exception('An error occurred Error : {0}'.format(e))
+                    logger.exception('results value : {0}'.format(results))
+                    raise ValueError('Result value not matched')
+
 
                     logger.info('Success to write Mitre information to {0}/{1}/{2}'.format(path, args.dest, malware))
 
