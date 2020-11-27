@@ -95,7 +95,7 @@ if __name__ =='__main__':
                 if results:
                     with open('{0}/{1}/{2}.txt'.format(path, args.dest, malware), 'w') as f:
                         for result in results:
-                            f.writelines(result+'\n\n\n')
+                            f.writelines(result.encode('utf-8')+'\n\n\n')
 
                     logger.info('Success to write Mitre information to {0}/{1}/{2}'.format(path, args.dest, malware))
 
