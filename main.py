@@ -89,14 +89,15 @@ if __name__ =='__main__':
                 results = list()
                 for box in driver.find_elements_by_class_name('box.active'): # parse threat box
                     box.click()
-                    results.append(driver.find_element_by_class_name('description').text)
+                    results.append(driver.find_element_by_class_name('text-center').text + '\n')
+                    results.append(driver.find_element_by_class_name('description').text + '\n\n\n')
                     driver.find_element_by_class_name('close-modal.closeAttackModal').click()
 
                 try:
                     if results:
                         with open('{0}/{1}/{2}.txt'.format(path, args.dest, malware), 'w') as f:
                             for result in results:
-                                f.writelines(result.encode('utf-8')+'\n\n\n')
+                                f.writelines(result.encode('utf-8'))
                 except Exception as e:
                     logger.exception('An error occurred Error : {0}'.format(e))
                     logger.exception('results value : {0}'.format(results))
